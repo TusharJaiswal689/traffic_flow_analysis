@@ -1,7 +1,7 @@
 
 def traffic_delay_ratio(current_speed: float, free_flow_speed: float, road_closure: bool):
     if road_closure:
-        return True
+        return -1, True
     delay_ratio = (current_speed/free_flow_speed).__round__(2)
     # print(f"Delay Ratio: {delay_ratio}")
 
@@ -13,6 +13,6 @@ def traffic_delay_ratio(current_speed: float, free_flow_speed: float, road_closu
         traffic = "Jam"
     else:
         print("Invalid Delay Ratio. Verify current_speed and free_flow_speed")
-        return -1
+        return -1, "Invalid"
     print(f"Delay Ratio: {delay_ratio}\nTraffic: {traffic}")
-    return delay_ratio
+    return delay_ratio, traffic

@@ -3,9 +3,9 @@ import os
 from datetime import datetime
 from urllib.parse import quote
 import requests
-import analysis
-from app_logging import logger
 
+from src import analysis
+from app_logging import logger
 
 class TrafficAnalyzer:
     """Fetches, analyzes, and logs real-time TomTom traffic data for a list of streets."""
@@ -85,7 +85,7 @@ class TrafficAnalyzer:
         road_closure = flow_data.get("roadClosure", False)
         timestamp = datetime.now().isoformat(timespec="seconds")
 
-        delay_ratio = analysis.traffic_delay_ratio(
+        delay_ratio, traffic_condition = analysis.traffic_delay_ratio(
             current_speed, free_flow_speed, road_closure
         )
 
@@ -100,6 +100,7 @@ class TrafficAnalyzer:
             "confidence",
             "road_closure",
             "delay_ratio",
+            "traffic_condition"
         ]
         row = [
             street,
@@ -111,6 +112,7 @@ class TrafficAnalyzer:
             confidence,
             road_closure,
             delay_ratio,
+            traffic_condition
         ]
 
         with open(self.output_file, mode="a", newline="", encoding="utf-8") as csv_file:
