@@ -10,10 +10,10 @@ if os.path.isfile("streets.txt"):
     with open("streets.txt", "r") as f:
         STREETS = [line.strip() for line in f]
 else:
-    print("Create a file 'streets.txt' in porject root and add roads to analyze in each line.")
+    print("Create a file 'streets.txt' in project root and add roads to analyze in each line.")
 
 
-print(STREETS)
-# if __name__ == "__main__":
-#     tracker = TrafficAnalyzer(streets=STREETS, api_key=API_KEY)
-#     tracker.run()
+# print(STREETS)
+if __name__ == "__main__":
+    tracker = TrafficAnalyzer(streets=STREETS, api_key=API_KEY)
+    tracker.run()
